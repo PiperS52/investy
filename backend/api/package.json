@@ -17,14 +17,23 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/api/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/api/test/jest-e2e.json",
+    "typeorm": "ts-node -r tsconfig-paths/register -r ./node_modules/.bin/typeorm",
+    "typeorm:create": "npm run typeorm migrate:create",
+    "typeorm:generate": "npm run typeorm -- -d ./typeorm.config.ts migration:generate",
+    "typeorm:run": "npm run typeorm -- -d ./typeorm.config.ts migration:run",
+    "typeorm:revert": "npm run typeorm -- -d ./typeorm.config.ts migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/typeorm": "^11.0.0",
+    "pg": "^8.16.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.23"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -74,6 +83,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
+      "^@app/config(|/.*)$": "<rootDir>/libs/config/src/$1",
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
       "^@app/investments(|/.*)$": "<rootDir>/libs/investments/src/$1"
     }
   }
