@@ -1,11 +1,10 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { readFileSync } from 'fs';
 import { registerAs } from '@nestjs/config';
 import { getEnv } from './helpers';
-import { get } from 'http';
 
 export default registerAs(
-  'database', async (): Promise<PostgresConnectionOptions> => {
+  'database',
+  async (): Promise<PostgresConnectionOptions> => {
     const config: DatabaseConfig = {
       type: 'postgres' as const,
       host: getEnv('DB_HOST'),
@@ -22,9 +21,9 @@ export default registerAs(
       migrationsRun: getEnv('DB_MIGRATIONS_RUN') === 'true',
     };
     return config;
-  });
+  },
+);
 
-  interface DatabaseConfig extends PostgresConnectionOptions {
-    autoLoadEntities: true;
-  }
-
+interface DatabaseConfig extends PostgresConnectionOptions {
+  autoLoadEntities: true;
+}

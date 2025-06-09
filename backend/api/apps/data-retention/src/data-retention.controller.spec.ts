@@ -11,7 +11,9 @@ describe('DataRetentionController', () => {
       providers: [DataRetentionService],
     }).compile();
 
-    dataRetentionController = app.get<DataRetentionController>(DataRetentionController);
+    dataRetentionController = app.get<DataRetentionController>(
+      DataRetentionController,
+    );
   });
 
   describe('root', () => {
