@@ -40,8 +40,18 @@ export class InvestmentsController {
   async getAllInvestments(
     @Query(new ValidationPipe({ transform: true })) query: any,
   ): Promise<GetInvestmentDto[]> {
-    // Logic to fetch all investments
-    return [];
+    const investments = await this.investmentsService.findAll();
+    return investments.map<GetInvestmentDto>((investment) => ({
+      id: investment.id,
+      title: investment.title,
+      shortDescription: investment.shortDescription,
+      longDescription: investment.longDescription,
+      fundsRaised: investment.fundsRaised,
+      fundsTarget: investment.fundsTarget,
+      numberOfInvestors: investment.numberOfInvestors,
+      category: investment.category,
+      location: investment.location,
+    }));
   }
 
   //   @Get(':id')

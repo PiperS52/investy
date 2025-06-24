@@ -33,10 +33,10 @@ export class Investment {
   closingDate: string;
 
   @Column({ type: 'varchar', name: 'problem_statement', length: 750 })
-  problem_statement: string;
+  problemStatement: string;
 
   @Column({ type: 'varchar', name: 'solution_statement', length: 750 })
-  solution_statement: string;
+  solutionStatement: string;
 
   @Column({ type: 'varchar', name: 'use_of_funds', length: 750 })
   useOfFunds: string;

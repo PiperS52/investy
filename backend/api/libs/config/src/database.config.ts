@@ -1,4 +1,5 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { CreateInvestmentsTable1750418436740 } from '@app/database/migrations/1750418436740-create-investments-table';
 import { registerAs } from '@nestjs/config';
 import { getEnv } from './helpers';
 
@@ -17,7 +18,7 @@ export default registerAs(
       extra: {
         query_timeout: 10000 as const,
       },
-      migrations: [],
+      migrations: [CreateInvestmentsTable1750418436740],
       migrationsRun: getEnv('DB_MIGRATIONS_RUN') === 'true',
     };
     return config;
