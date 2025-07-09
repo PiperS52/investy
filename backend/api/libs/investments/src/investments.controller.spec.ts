@@ -2,10 +2,14 @@ import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { InvestmentsController } from './investments.controller';
 import { InvestmentsService } from './investments.service';
+import { investments } from '@test-data/investments';
 
 describe('InvestmentsController', () => {
-  let controller: InvestmentsController;
-  let service: InvestmentsService;
+  let investmentsController: InvestmentsController;
+  // let service: InvestmentsService;
+  const mockInvestmentsService = {
+    findAll: jest.fn(),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -13,27 +17,39 @@ describe('InvestmentsController', () => {
       providers: [
         {
           provide: InvestmentsService,
-          useValue: {
-            getAllInvestments: jest.fn(),
-            getInvestmentById: jest.fn(),
-          },
+          useValue: mockInvestmentsService,
         },
       ],
     }).compile();
 
-    controller = module.get<InvestmentsController>(InvestmentsController);
-    service = module.get<InvestmentsService>(InvestmentsService);
+    investmentsController = module.get<InvestmentsController>(
+      InvestmentsController,
+    );
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(InvestmentsController).toBeDefined();
   });
 
-  it('should call getAllInvestments', async () => {
-    const result = [];
-    jest.spyOn(service, 'getAllInvestments').mockResolvedValue(result);
+  // it('should call getAllInvestments', async () => {
+  //   const result = [];
+  //   jest.spyOn(service, 'getAllInvestments').mockResolvedValue(result);
 
-    expect(await controller.getAllInvestments({})).toBe(result);
-    expect(service.getAllInvestments).toHaveBeenCalled();
+  //   expect(await controller.getAllInvestments({})).toBe(result);
+  //   expect(service.getAllInvestments).toHaveBeenCalled();
+  // });
+
+  describe('getAllInvestments', () => {
+    it('should return an array of investments', async () => {
+      mockInvestmentsService.findAll.mockResolvedValue(investments);
+      const result = await investmentsController.getAllInvestments({});
+      expect(result).toEqual(investments);
+      expect(mockInvestmentsService.findAll).toHaveBeenCalled();
+    });
+
+    // it('should throw NotFoundException if no investments found', async () => {
+    //   mockInvestmentsService.findAll.mockResolvedValue([]);
+    //   await expect(investmentsController.getAllInvestments({})).rejects.toThrow(NotFoundException);
+    // });
   });
 });

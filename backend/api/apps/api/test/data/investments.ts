@@ -18,9 +18,9 @@ export const investments = [
     category: categories[0],
     location: locations[0],
     closingDate: formatISO(new Date(), { representation: 'date' }),
-    problem_statement:
+    problemStatement:
       'The problem we are solving is the lack of efficient meal delivery services for the elderly.',
-    solution_statement:
+    solutionStatement:
       'Our solution is a tech-driven platform that connects volunteers with elderly individuals in need of meal delivery.',
     useOfFunds:
       'The funds will be used to develop the platform, hire staff, and market the service.',

@@ -30,13 +30,14 @@ import {
 export class InvestmentsController {
   constructor(private readonly investmentsService: InvestmentsService) {}
 
-  @Get()
   @ApiOperation({ summary: 'Get all investments' })
   @ApiResponse({
     status: 200,
     description: 'Returns a list of investments.',
     type: [GetInvestmentDto],
+    isArray: true,
   })
+  @Get()
   async getAllInvestments(
     @Query(new ValidationPipe({ transform: true })) query: any,
   ): Promise<GetInvestmentDto[]> {
@@ -51,6 +52,11 @@ export class InvestmentsController {
       numberOfInvestors: investment.numberOfInvestors,
       category: investment.category,
       location: investment.location,
+      closingDate: investment.closingDate,
+      problemStatement: investment.problemStatement,
+      solutionStatement: investment.solutionStatement,
+      useOfFunds: investment.useOfFunds,
+      customers: investment.customers,
     }));
   }
 

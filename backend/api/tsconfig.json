@@ -23,7 +23,9 @@
       "@app/database": ["libs/database/src"],
       "@app/database/*": ["libs/database/src/*"],
       "@app/investments": ["libs/investments/src"],
-      "@app/investments/*": ["libs/investments/src/*"]
+      "@app/investments/*": ["libs/investments/src/*"],
+      "@test-data": ["apps/api/test/data"],
+      "@test-data/*": ["apps/api/test/data/*"]
     }
   }
 }
