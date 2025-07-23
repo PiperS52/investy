@@ -1,0 +1,16 @@
+export interface Investment {
+  id: number,
+  title: string,
+  shortDescription: string,
+  longDescription: string,
+  fundsRaised: number,
+  fundsTarget: number,
+  numberOfInvestors: number,
+  category: string,
+  location: string,
+  closingDate: string,
+  problemStatement: string,
+  solutionStatement: string,
+  useOfFunds: string,
+  customers: string,
+}

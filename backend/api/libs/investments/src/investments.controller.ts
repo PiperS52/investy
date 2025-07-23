@@ -42,6 +42,7 @@ export class InvestmentsController {
     @Query(new ValidationPipe({ transform: true })) query: any,
   ): Promise<GetInvestmentDto[]> {
     const investments = await this.investmentsService.findAll();
+    console.log('Fetched investments:', investments);
     return investments.map<GetInvestmentDto>((investment) => ({
       id: investment.id,
       title: investment.title,
